@@ -34,7 +34,7 @@ const attractions: Attraction[] = [
     id: 4,
     name: "All Attractions",
     image: "all-attractions.jpg",
-    mapPosition: { x: 70, y: 80 }
+    mapPosition: { x: 0, y: 0 }
   }
 ];
 
@@ -102,10 +102,16 @@ export default function MapAttractions() {
 
           <div className="relative h-full">
             
-            {attractions.map((attraction) => (
-              <div
-                key={`spot-${attraction.id}`}
-                className="absolute w-8 h-8 grid place-items-center  bg-red-500 rounded-full border-2 border-white shadow-lg cursor-pointer hover:scale-125 transition-transform duration-200"
+            {attractions.map((attraction) => {
+
+              if(attraction.mapPosition.x === 0 && attraction.mapPosition.y === 0) return null
+                return (
+                  <div
+                    key={`spot-${attraction.id}`}
+                    className={"absolute w-8 h-8 grid place-items-center  bg-red-500 rounded-full border-2 border-white shadow-lg cursor-pointer hover:scale-125 transition-transform duration-200"
+
+
+                 }
                 style={{
                   left: `${attraction.mapPosition.x}%`,
                   top: `${attraction.mapPosition.y}%`,
@@ -119,7 +125,8 @@ export default function MapAttractions() {
               >
              {attraction.name[0]}
               </div>
-            ))}
+            )}
+            )}
           </div>
         </div>
       </div>
